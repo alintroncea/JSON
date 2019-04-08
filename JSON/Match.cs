@@ -8,7 +8,7 @@ namespace JSON
     {
        private bool successMatch;
 
-        public void SetSuccess(bool successMatch)
+        public Match(bool successMatch)
         {
             this.successMatch = successMatch;
         }
