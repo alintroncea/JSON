@@ -19,7 +19,7 @@ namespace JSON
         {
             foreach(var pattern in patterns)
             {
-               
+               int
                         
             }
             return matchClass;
