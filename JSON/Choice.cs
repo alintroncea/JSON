@@ -8,8 +8,7 @@ namespace JSON
     {
       
         readonly IPattern[] patterns;
-        Match matchClass;
-
+       
         public Choice(params IPattern[] patterns)
         {
             this.patterns = patterns;
@@ -19,28 +18,14 @@ namespace JSON
         {
             foreach(var pattern in patterns)
             {
+                
                 if (pattern.Match(text).Success())
-                matchClass = new Match(true);
-                else
-                {
-                    matchClass = new Match(false);
-                }
+
+                return new Match(true, pattern.Match(text).RemainingText());            
             }
-            return matchClass;
+            return new Match(false, text);
         }
 
 
-
-        //public bool Match(string text)
-        //{
-        //    foreach(var pattern in patterns)
-        //    {
-
-        //        if (pattern.Match(text))
-        //            return true;
-        //    }
-
-        //    return false;
-        //}
     }
 }

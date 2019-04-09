@@ -4,11 +4,30 @@ using System.Text;
 
 namespace JSON
 {
-    class Sequence 
+   public class Sequence : IPattern
     {
-        public bool Match(string text)
+        readonly IPattern[] patterns;
+
+        public Sequence (params IPattern[] patterns)
         {
-            throw new NotImplementedException();
+            this.patterns = patterns;
+        }
+
+        public IMatch Match(string text)
+        {
+           
+            foreach (var pattern in patterns)
+            {
+                IMatch match = pattern.Match(text);
+                if (!match.Success())
+                {
+                    return new Match(false, text);
+                    
+                }
+                text = match.RemainingText();
+                
+            }
+            return new Match(true, text);
         }
     }
 }

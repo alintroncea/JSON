@@ -8,7 +8,7 @@ namespace JSON
     {
         private readonly char startChar;
         private readonly char endChar;
-        Match matchClass ;
+       
 
         public Range(char start, char end)
         {
@@ -20,22 +20,13 @@ namespace JSON
         public IMatch Match(string text)
         {
             if (String.IsNullOrEmpty(text))
-                matchClass = new Match(false);
-            else
-            {
-                char firstCharacter = text[0];
-                matchClass = new Match(firstCharacter >= startChar && firstCharacter <= endChar);
-            }
-            
-            return matchClass;
+                return new Match(false, text);
+           
+            char firstCharacter = text[0];
+            return new Match(firstCharacter >= startChar && firstCharacter <= endChar, text.Substring(1));
+           
+           
         }
 
-        //public bool Match(string text)
-        //{
-        //    if (String.IsNullOrEmpty(text))
-        //        return false;
-        //    char firstCharacter = text[0];
-        //    return firstCharacter >= startChar && firstCharacter <= endChar;
-        //}
     }
 }

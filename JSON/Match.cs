@@ -6,16 +6,18 @@ namespace JSON
 {
    public class Match : IMatch
     {
-       private bool successMatch;
+        readonly bool successMatch;
+        readonly string text;
 
-        public Match(bool successMatch)
+        public Match(bool successMatch, string text)
         {
             this.successMatch = successMatch;
+            this.text = text;
         }
 
         public string RemainingText()
         {
-            return "";
+            return text;
         }
 
         public bool Success()

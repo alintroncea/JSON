@@ -7,9 +7,9 @@ namespace JSON
 
     public class Character : IPattern
     {
-        Match matchClass;
+
         readonly char pattern;
-    
+
         public Character(char pattern)
         {
             this.pattern = pattern;
@@ -19,27 +19,12 @@ namespace JSON
         {
             if (String.IsNullOrEmpty(text))
             {
-                matchClass = new Match(false);
+                return new Match(false, text);
             }
-            else
-            {
-                matchClass = new Match(text[0] == pattern);
-            }
-            
 
-            return matchClass;
+            return new Match(text[0] == pattern, text.Substring(1));
+
         }
-
-
-
-        //public bool Match(string text)
-        //{
-        //    if (String.IsNullOrEmpty(text))
-        //        return false;
-
-        //    return text[0] == pattern;
-        //}
-
 
     }
 }
