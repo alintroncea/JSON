@@ -18,10 +18,10 @@ namespace JSON
         {
             foreach(var pattern in patterns)
             {
-                
-                if (pattern.Match(text).Success())
+                IMatch match = pattern.Match(text);
+                if (match.Success())
 
-                return new Match(true, pattern.Match(text).RemainingText());            
+                    return match;          
             }
             return new Match(false, text);
         }

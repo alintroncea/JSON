@@ -15,13 +15,13 @@ namespace JSON
 
         public IMatch Match(string text)
         {
-           
+            string original = text;
             foreach (var pattern in patterns)
             {
                 IMatch match = pattern.Match(text);
                 if (!match.Success())
                 {
-                    return new Match(false, text);
+                    return new Match(false, original);
                     
                 }
                 text = match.RemainingText();
