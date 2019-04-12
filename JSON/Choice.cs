@@ -20,7 +20,6 @@ namespace JSON
             {
                 IMatch match = pattern.Match(text);
                 if (match.Success())
-
                     return match;          
             }
             return new Match(false, text);

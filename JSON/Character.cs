@@ -15,16 +15,10 @@ namespace JSON
             this.pattern = pattern;
         }
 
-        public IMatch Match(string text)
-        {
-            if (String.IsNullOrEmpty(text))
-            {
-                return new Match(false, text);
-            }
-
-            return new Match(text[0] == pattern, text.Substring(1));
-
-        }
+        public IMatch Match(string text) 
+            => String.IsNullOrEmpty(text)
+                ? new Match(false, text)
+                : new Match(text[0] == pattern, text.Substring(1));
 
     }
 }
