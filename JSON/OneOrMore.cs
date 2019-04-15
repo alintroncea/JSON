@@ -1,21 +1,17 @@
 ﻿using System;
-
 using System.Collections.Generic;
-
 using System.Text;
 
-
 namespace JSON
-
 {
-    public class Many : IPattern
+    public class OneOrMore : IPattern
     {
         readonly IPattern pattern;
-        public Many(IPattern pattern)
+
+        public OneOrMore(IPattern pattern)
         {
             this.pattern = pattern;
         }
-
         public IMatch Match(string text)
         {
             string original = text;
@@ -30,9 +26,7 @@ namespace JSON
                 }
                 return new Match(true, text);
             }
-            return new Match(true, original);
-
+            return new Match(false, original);
         }
-
     }
 }

@@ -5,11 +5,7 @@ namespace JSON
     {
         static void Main(string[] args)
         {
-            var a = new Many(new Character('a'));
-
-            Console.WriteLine(a.Match("aabc").Success());
-            Console.WriteLine(a.Match("aabc").RemainingText());
-            Console.Read();
+           
         }
     }
 }
