@@ -18,13 +18,19 @@ namespace JSON
             if (!String.IsNullOrEmpty(text))
             {
                 IMatch match;
+                bool found = false;
                 foreach (char c in text)
                 {
                     match = pattern.Match(text);
                     if (match.Success())
+                    {
+                        found = true;
                         text = match.RemainingText();
+                    }
                 }
-                return new Match(true, text);
+                return !found ? 
+                    new Match(false, original):
+                    new Match(true, text);
             }
             return new Match(false, original);
         }
