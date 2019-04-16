@@ -14,14 +14,11 @@ namespace JSON
 
         public IMatch Match(string text)
         {
-            if (!String.IsNullOrEmpty(text))
-            {
-                var match = pattern.Match(text);
+            var match = pattern.Match(text);
 
-                if (match.Success())
-                    return match;
-            }
-            return new Match(true, text);
+            return match.Success()
+                ? match
+                : new Match(true, text);
         }
     }
 }

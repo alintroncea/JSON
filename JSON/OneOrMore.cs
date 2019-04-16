@@ -7,32 +7,23 @@ namespace JSON
     public class OneOrMore : IPattern
     {
         readonly IPattern pattern;
+        readonly IPattern many;
 
         public OneOrMore(IPattern pattern)
         {
             this.pattern = pattern;
+            many = new Many(pattern);
         }
+
         public IMatch Match(string text)
         {
-            string original = text;
-            if (!String.IsNullOrEmpty(text))
-            {
-                IMatch match;
-                bool found = false;
-                foreach (char c in text)
-                {
-                    match = pattern.Match(text);
-                    if (match.Success())
-                    {
-                        found = true;
-                        text = match.RemainingText();
-                    }
-                }
-                return !found ? 
-                    new Match(false, original):
-                    new Match(true, text);
-            }
-            return new Match(false, original);
+            IMatch match = pattern.Match(text);
+
+            if (!match.Success())
+                return new Match(false, text);
+
+            return many.Match(match.RemainingText());
         }
+
     }
 }

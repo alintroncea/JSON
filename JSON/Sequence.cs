@@ -24,8 +24,7 @@ namespace JSON
                     return new Match(false, original);
                     
                 }
-                text = match.RemainingText();
-                
+                text = match.RemainingText();               
             }
             return new Match(true, text);
         }

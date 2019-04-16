@@ -18,20 +18,11 @@ namespace JSON
 
         public IMatch Match(string text)
         {
-            string original = text;
-            if (!String.IsNullOrEmpty(text))
-            {
-                IMatch match;
-                foreach (char c in text)
-                {
-                    match = pattern.Match(text);
-                    if (match.Success())
-                        text = match.RemainingText();
-                }
-                return new Match(true, text);
-            }
-            return new Match(true, original);
+            IMatch match = pattern.Match(text);
+            while (match.Success())
+                match = pattern.Match(match.RemainingText());
 
+            return new Match(true, match.RemainingText());
         }
 
     }

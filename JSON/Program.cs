@@ -5,10 +5,8 @@ namespace JSON
     {
         static void Main(string[] args)
         {
-            var a = new OneOrMore(new Range('0','9'));
-
-            Console.WriteLine(a.Match("bc").Success());
-            Console.WriteLine(a.Match("bc").RemainingText());
+            List a = new List(new Range('0', '9'), new Character(','));
+            Console.WriteLine(a.Match("abc").Success());
             Console.Read();
         }
     }
