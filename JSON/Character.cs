@@ -7,6 +7,7 @@ namespace JSON
 
     public class Character : IPattern
     {
+        //primul caracter din text se potriveste cu pattern-ul?
 
         readonly char pattern;
 

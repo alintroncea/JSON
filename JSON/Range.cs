@@ -6,6 +6,9 @@ namespace JSON
 {
    public class Range : IPattern
     {
+
+        //Clasa Range validează dacă caracterul cu care începe un string dat se află într-un anumit interval
+
         private readonly char startChar;
         private readonly char endChar;
        

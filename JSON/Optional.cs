@@ -4,9 +4,12 @@ using System.Text;
 
 namespace JSON
 {
-    public class Optional
+    public class Optional : IPattern
     {
+        //Clasa Optional primește un singur pattern și consumă pattern-ul din stringul dat
+
         readonly IPattern pattern;
+
         public Optional(IPattern pattern)
         {
             this.pattern = pattern;

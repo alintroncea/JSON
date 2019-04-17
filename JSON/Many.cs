@@ -10,6 +10,8 @@ namespace JSON
 {
     public class Many : IPattern
     {
+        //Clasa Many primește un singur pattern și consumă pattern-ul din stringul dat de oricâte ori apare acesta la începutul textului dat.
+
         readonly IPattern pattern;
         public Many(IPattern pattern)
         {

@@ -5,8 +5,11 @@ namespace JSON
     {
         static void Main(string[] args)
         {
-            List a = new List(new Range('0', '9'), new Character(','));
-            Console.WriteLine(a.Match("abc").Success());
+            Number number = new Number();
+            IMatch match = number.Match("121e");
+
+            Console.WriteLine("Success :" + match.Success());
+            Console.WriteLine("Remaining Text :" + match.RemainingText());
             Console.Read();
         }
     }

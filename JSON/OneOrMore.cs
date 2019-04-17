@@ -6,6 +6,8 @@ namespace JSON
 {
     public class OneOrMore : IPattern
     {
+        //Clasa OneOrMore primește un singur pattern și consumă pattern-ul din stringul dat când acesta apare măcar odată.
+
         readonly IPattern pattern;
         readonly IPattern many;
 

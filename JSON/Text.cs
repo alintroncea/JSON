@@ -6,6 +6,9 @@ namespace JSON
 {
    public class Text : IPattern
     {
+        //Clasa Text validează dacă textul este prefixat cu un string dat.
+
+
         readonly string prefix;
 
         public Text(string prefix)
