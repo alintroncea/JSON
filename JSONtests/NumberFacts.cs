@@ -12,6 +12,7 @@ namespace JSON
 
         [Theory]
         [InlineData("12.", ".")]
+        [InlineData("012", "12")]
         [InlineData("12.23", "")]
         [InlineData("256", "")]
         [InlineData("12.123e3", "")]
@@ -19,9 +20,8 @@ namespace JSON
         [InlineData("12.123E+3", "")]
         [InlineData("12.123E-2", "")]
         [InlineData("12.123E", "E")]
-
-
-        //[InlineData("01", "1")]
+        [InlineData("1E2.123E-2", ".123E-2")]
+        [InlineData("01", "1")]
 
 
         public void ReturnTrue(string pattern, string remainingText)

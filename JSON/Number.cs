@@ -17,19 +17,18 @@ namespace JSON
             Optional dot = new Optional(new Character('.'));
             Choice naturalNumber = new Choice(zero, numbers);
             Optional minus = new Optional(new Character('-'));
-            Optional scientific = new Optional(new Choice(new Character('e'), new Character('E')));
-            Optional signs = new Optional(new Choice(new Character('+'), new Character('-')));
+            Choice scientific = new Choice(new Character('e'), new Character('E'));
+            Choice signs = new Choice(new Character('+'), new Character('-'));
 
            
             Sequence numbersAndDot = new Sequence(numbers, dot, numbers);
-            Choice numbersAndScientific = new Choice(new Sequence(scientific,signs,naturalNumber));
-
-            pattern = new Sequence(new Choice(minus,naturalNumber),new Choice(numbersAndDot,naturalNumber),
-               new Optional(numbersAndScientific));
-           
+            Choice numbersOrMinus = new Choice(minus, naturalNumber);
+            Choice numbersOrDot = new Choice(numbersAndDot,naturalNumber);
+            Optional numbersAndScientific = new Optional(new Sequence(scientific,new Optional(signs),numbers));
 
 
-
+            pattern = new Sequence(numbersOrMinus,numbersOrDot,numbersAndScientific);
+      
         }
 
         public IMatch Match(string text)
