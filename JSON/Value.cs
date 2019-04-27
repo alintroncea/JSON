@@ -22,9 +22,8 @@ namespace JSON
             var element = new Sequence(new Optional(whitespaces), value, new Optional(whitespaces));
             var elements = new List(element, new Character(','));
 
-            var array = 
-                new Choice(new Sequence(new Character('['),elements, new Character(']')),
-                new Sequence(new Character('['), whitespaces, new Character(']')));
+            var array = new Choice(new Sequence(new Optional(whitespaces),new Character('['), elements, new Character(']'),new Optional(whitespaces)),
+                new Sequence(new Optional(whitespaces), new Character('['), whitespaces, new Character(']'), new Optional(whitespaces)));
 
             value.Add(array);
 

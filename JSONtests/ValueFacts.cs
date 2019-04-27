@@ -28,6 +28,7 @@ namespace JSON
         [InlineData("[\r24]", "")]
         [InlineData("[324]", "")]
         [InlineData("[1,2]", "")]
+        [InlineData(" [ 1,2 ] ", "")]
         [InlineData("\"d\"", "")]
         [InlineData("\"da\"", "")]
         [InlineData("[true,false]", "")]
