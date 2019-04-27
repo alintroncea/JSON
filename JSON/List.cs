@@ -4,7 +4,7 @@ using System.Text;
 
 namespace JSON
 {
-    public class List
+    public class List : IPattern
     {
         readonly IPattern element;
         readonly IPattern separator;

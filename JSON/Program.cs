@@ -5,11 +5,10 @@ namespace JSON
     {
         static void Main(string[] args)
         {
-            Number number = new Number();
-            IMatch match = number.Match("01");
+            StringClass stringClass = new StringClass();
+            IMatch match = stringClass.Match("\"Te\\\"st\"");
 
-            Console.WriteLine("Success :" + match.Success());
-            Console.WriteLine("Remaining Text :" + match.RemainingText());
+            Console.WriteLine(match.RemainingText());
             Console.Read();
         }
     }
