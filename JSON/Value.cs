@@ -19,11 +19,16 @@ namespace JSON
                 );
 
             var whitespaces = new Many(new Any(" \r\n\t"));
-            var element = new Sequence(new Optional(whitespaces), value, new Optional(whitespaces));
+            var element = new Sequence(whitespaces, value, whitespaces);
             var elements = new List(element, new Character(','));
 
-            var array = new Choice(new Sequence(new Optional(whitespaces),new Character('['), elements, new Character(']'),new Optional(whitespaces)),
-                new Sequence(new Optional(whitespaces), new Character('['), whitespaces, new Character(']'), new Optional(whitespaces)));
+            var array = new Sequence(whitespaces,
+                new Character('['),
+                elements,
+                whitespaces,               
+                new Character(']'),
+                whitespaces
+               );
 
             value.Add(array);
 
