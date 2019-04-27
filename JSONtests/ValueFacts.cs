@@ -32,6 +32,9 @@ namespace JSON
         [InlineData("\"d\"", "")]
         [InlineData("\"da\"", "")]
         [InlineData("[true,false]", "")]
+        [InlineData("{\"name\":\"John\",\"age\":30,\"car\":null}", "")]
+        [InlineData("{\"boolean\":\"true\"}", "")]
+        [InlineData("{}", "")]
 
 
 

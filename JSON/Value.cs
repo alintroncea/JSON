@@ -25,12 +25,29 @@ namespace JSON
             var array = new Sequence(whitespaces,
                 new Character('['),
                 elements,
-                whitespaces,               
+                whitespaces,
                 new Character(']'),
                 whitespaces
                );
 
             value.Add(array);
+
+            var member = new Sequence(whitespaces,
+                new StringClass(),
+                whitespaces,
+                new Character(':'), element);
+
+            var members = new List(member, new Character(','));
+
+            var myObject = new Sequence(whitespaces,
+                new Character('{'),
+                members,
+                whitespaces,
+                new Character('}'),
+                whitespaces
+               );
+
+            value.Add(myObject);
 
             pattern = value;
         }
