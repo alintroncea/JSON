@@ -34,7 +34,9 @@ namespace JSON
         [InlineData("[true,false]", "")]
         [InlineData("{\"name\":\"John\",\"age\":30,\"car\":null}", "")]
         [InlineData("{\"boolean\":\"true\"}", "")]
+        [InlineData("{\"First Number\":\"12\",\"Second Number\":\"12.5\",\"Third Number\":\"12.123E+3\"}", "")]
         [InlineData("{}", "")]
+        [InlineData("{\t}", "")]
 
 
 
