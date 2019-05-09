@@ -89,14 +89,15 @@ namespace JSON
 
         [Theory]
         [InlineData("abcx", "abcx")]
-
         public void ReturnsFalseWhenTest1isInCorrect(string pattern, string remainingText)
         {
-            var error = (Error)abcde.Match(pattern);
-            Assert.False(test1.Match(pattern).Success());
+            var abcd = new Sequence(
+                new Text("abc"),
+                new Character('d')
+            );
+            var error = (Error)abcd.Match(pattern);
             Assert.Equal(3, error.Position());
-            Assert.Equal(remainingText, test1.Match(pattern).RemainingText());
-
+            Assert.Equal(remainingText, error.RemainingText());
         }
     }
 
