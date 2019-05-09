@@ -28,13 +28,15 @@ namespace JSON
             var escapeSeq = new Sequence(new Character('\\'), escapeChars);
             var character = new Choice(
                 singleChar,
-                escapeSeq      
+                escapeSeq
             );
             var characters = new Many(character);
 
-            pattern = new Sequence(new Character('"'), 
+            pattern = new Sequence(new Character('"'),
                 characters,
                 new Character('"'));
+
+
         }
 
         public IMatch Match(string text)

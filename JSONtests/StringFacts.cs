@@ -36,12 +36,11 @@ namespace JSON
         }
 
         [Theory]
-        [InlineData("\" \\ \"")]
-
+        [InlineData("line")]
         public void ReturnFalse(string pattern)
-
         {
-            IMatch match = stringClass.Match(pattern);
+            var match = (Error)stringClass.Match(pattern);
+            Assert.Equal(0, match.Position());
             Assert.Equal(pattern, match.RemainingText());
             Assert.False(match.Success());
         }

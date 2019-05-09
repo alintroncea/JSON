@@ -16,8 +16,8 @@ namespace JSON
         {
             Range range = new Range(start, end);
 
-            var result = range.Match(match);
-
+            var result = (Error)range.Match(match);
+            Assert.Equal(0, result.Position());
             Assert.False(result.Success());
         }
 

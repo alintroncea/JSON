@@ -8,6 +8,7 @@ namespace JSON
     {
         private readonly IPattern pattern;
 
+       
         public Number()
         {
 
@@ -20,7 +21,8 @@ namespace JSON
             var exponential = new Sequence(new Any("eE"), new Optional(new Any("+-")), digits);
 
 
-            pattern = new Sequence(integer, new Optional(fractional), new Optional(exponential)); 
+            pattern = new Sequence(integer, new Optional(fractional), new Optional(exponential));
+
 
         }
 

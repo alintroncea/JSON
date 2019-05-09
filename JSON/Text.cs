@@ -4,12 +4,10 @@ using System.Text;
 
 namespace JSON
 {
-   public class Text : IPattern
+    public class Text : IPattern
     {
         //Clasa Text validează dacă textul este prefixat cu un string dat.
-
-
-        readonly string prefix;
+      readonly string prefix;
 
         public Text(string prefix)
         {
@@ -17,8 +15,8 @@ namespace JSON
         }
 
         public IMatch Match(string text) =>
-            !String.IsNullOrEmpty(text) && text.StartsWith(prefix)
-                ? new Match(true, text.Substring(prefix.Length))
-                : new Match(false, text);
+        !String.IsNullOrEmpty(text) && text.StartsWith(prefix)
+            ? new Match(true, text.Substring(prefix.Length))
+            : new Match(false, text);
     }
 }

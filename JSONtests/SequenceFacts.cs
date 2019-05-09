@@ -9,7 +9,7 @@ namespace JSON
     {
 
         static Sequence ab = new Sequence(new Character('a'), new Character('b'));
-        static Sequence abc = new Sequence(ab, new Character('c'));
+        static Sequence abcde = new Sequence(ab, new Character('c'), new Character('d'), new Character('e'), new Character('e'));
 
         [Theory]
         [InlineData("abcd", "cd")]
@@ -33,16 +33,7 @@ namespace JSON
 
         }
 
-        [Theory]
-        [InlineData("abcd", "d")]
-
-        public void ReturnsFalseWhenABCiscorrect(string pattern, string remainingText)
-        {
-            Assert.True(abc.Match(pattern).Success());
-            Assert.Equal(remainingText, abc.Match(pattern).RemainingText());
-
-        }
-
+       
 
        static Choice hex = new Choice(
     new Range('0', '9'),
@@ -79,6 +70,32 @@ namespace JSON
         {
             Assert.False(hexSeq.Match(pattern).Success());
             Assert.Equal(remainingText, hexSeq.Match(pattern).RemainingText());
+
+        }
+
+        [Theory]
+        [InlineData("abcdfff", "abcdfff")]
+
+        public void ReturnsFalseWhenABCisInCorrect(string pattern, string remainingText)
+        {
+            var error = (Error)abcde.Match(pattern);
+            Assert.False(abcde.Match(pattern).Success());
+            Assert.Equal(4, error.Position());
+            Assert.Equal(remainingText, abcde.Match(pattern).RemainingText());
+
+        }
+
+        static Sequence test1 = new Sequence(new Text("abc"), new Character('d'));
+
+        [Theory]
+        [InlineData("abcx", "abcx")]
+
+        public void ReturnsFalseWhenTest1isInCorrect(string pattern, string remainingText)
+        {
+            var error = (Error)abcde.Match(pattern);
+            Assert.False(test1.Match(pattern).Success());
+            Assert.Equal(3, error.Position());
+            Assert.Equal(remainingText, test1.Match(pattern).RemainingText());
 
         }
     }

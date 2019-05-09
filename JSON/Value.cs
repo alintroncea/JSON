@@ -23,7 +23,7 @@ namespace JSON
             var elements = new List(element, new Character(','));
 
             var array = new Sequence(whitespaces,
-                new Character('['),
+               new Character('['),
                 elements,
                 whitespaces,
                 new Character(']'),
@@ -50,11 +50,22 @@ namespace JSON
             value.Add(myObject);
 
             pattern = value;
+
         }
 
         public IMatch Match(string text)
         {
-            return pattern.Match(text);
+
+            IMatch match = pattern.Match(text);
+
+            return match;
+
+            //if (!match.Success())
+            //{
+            //    var error = (Error)pattern.Match(text);
+            //    return new (IMatch)Error(2, match.RemainingText());
+            //}
+            //return match;
         }
     }
 }

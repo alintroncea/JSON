@@ -1,4 +1,7 @@
 ﻿using System;
+using System.IO;
+
+
 namespace JSON
 {
     class Program
@@ -7,24 +10,18 @@ namespace JSON
         {
 
 
-            //"C:\Users\ecigoya\Desktop\NewDocument.txt";        
-            //string text = System.IO.File.ReadAllText(@args[0]);;
-            //Value value = new Value();
-            //IMatch match = value.Match(text);
-
-            //Console.WriteLine(match.Success());
-            //Console.Read();
-
-            // Test if input arguments were supplied:
             if (args.Length > 0)
             {
-                Console.WriteLine("Arguments Passed by the Programmer:");
-
-                // To print the command line  
-                // arguments using foreach loop 
+                Value value = new Value();
                 foreach (Object obj in args)
                 {
-                    Console.WriteLine(obj);
+                    var text = File.ReadAllText(@obj.ToString());
+                    var lineCount = File.ReadAllLines(@obj.ToString());
+                    IMatch match = value.Match(text);
+
+                    Console.WriteLine("Success : " + match.Success());
+                    Console.WriteLine("Remaining text :" + match.RemainingText());
+                  
                 }
             }
 
@@ -34,6 +31,6 @@ namespace JSON
             }
         }
 
-      
+
     }
 }

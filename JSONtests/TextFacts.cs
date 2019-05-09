@@ -34,7 +34,6 @@ namespace JSON
         public void ReturnsTrueWhenInputIsInCorrect(string pattern, string text)
         {
             Text textClass = new Text(pattern);
-
             var result = textClass.Match(text);
             Assert.False(result.Success());
             Assert.Equal(text, result.RemainingText());

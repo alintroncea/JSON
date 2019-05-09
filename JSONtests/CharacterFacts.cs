@@ -15,8 +15,8 @@ namespace JSON
         {
             Character character = new Character(pattern);
 
-            var result = character.Match(match);
-
+            var result = (Error)character.Match(match);
+            Assert.Equal(0, result.Position());
             Assert.False(result.Success());
         }
 

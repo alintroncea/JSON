@@ -4,7 +4,7 @@ using System.Text;
 
 namespace JSON
 {
-   public class Sequence : IPattern
+    public class Sequence : IPattern
     {
 
         //Clasa Sequance reprezintă o secvență de pattern-uri. 
@@ -21,12 +21,15 @@ namespace JSON
         public IMatch Match(string text)
         {
             string original = text;
+            int counter = 1;
             foreach (var pattern in patterns)
             {
                 IMatch match = pattern.Match(text);
+                if (match.Success())
+                    counter++;
                 if (!match.Success())
                 {
-                    return new Match(false, original);
+                    return new Error(counter, original);
 
                 }
                 text = match.RemainingText();

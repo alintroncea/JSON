@@ -47,6 +47,16 @@ namespace JSON
             Assert.True(match.Success());
         }
 
-      
+
+        //[Theory]
+        //[InlineData("\"a", 2)]
+
+
+        //public void ReturnFalse(string pattern, int position)
+        //{
+        //    var result = (Error)value.Match(pattern);
+        //    Assert.Equal(position, result.Position());
+        //    Assert.False(result.Success());
+        //}
     }
 }
