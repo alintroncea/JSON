@@ -21,17 +21,22 @@ namespace JSON
         public IMatch Match(string text)
         {
             string original = text;
-            int counter = 1;
+            int counter = 0;
+
             foreach (var pattern in patterns)
             {
+
                 IMatch match = pattern.Match(text);
-                if (match.Success())
-                    counter++;
                 if (!match.Success())
                 {
+                    if (match is Error error)
+                    {
+                        counter += error.Position();
+                    }
                     return new Error(counter, original);
-
                 }
+                counter += text.Length - match.RemainingText().Length;
+
                 text = match.RemainingText();
             }
             return new Match(true, text);

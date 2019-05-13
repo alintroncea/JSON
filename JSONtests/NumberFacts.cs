@@ -36,13 +36,10 @@ namespace JSON
 
         [Theory]
         [InlineData("e", "e")]
-       
-       
-
-        public void ReturnFalse(string pattern, string remainingText)
+      public void ReturnFalse(string pattern, string remainingText)
 
         {
-            IMatch match = number.Match(pattern);
+            var match =  number.Match(pattern);
             Assert.False(match.Success());
             Assert.Equal(remainingText, match.RemainingText());
 

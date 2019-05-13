@@ -35,15 +35,7 @@ namespace JSON
             Assert.True(match.Success());
         }
 
-        [Theory]
-        [InlineData("line")]
-        public void ReturnFalse(string pattern)
-        {
-            var match = (Error)stringClass.Match(pattern);
-            Assert.Equal(0, match.Position());
-            Assert.Equal(pattern, match.RemainingText());
-            Assert.False(match.Success());
-        }
+       
 
     }
 }

@@ -13,7 +13,7 @@ namespace JSON
 
         [Theory]
         [InlineData("abcd", "cd")]
-       
+
         public void ReturnsFalseWhenABiscorrect(string pattern, string remainingText)
         {
             Assert.True(ab.Match(pattern).Success());
@@ -28,26 +28,26 @@ namespace JSON
 
         public void ReturnsFalseWhenABisIncorrect(string pattern, string remainingText)
         {
-            Assert.False (ab.Match(pattern).Success());
+            Assert.False(ab.Match(pattern).Success());
             Assert.Equal(remainingText, ab.Match(pattern).RemainingText());
 
         }
 
-       
 
-       static Choice hex = new Choice(
-    new Range('0', '9'),
-    new Range('a', 'f'),
-    new Range('A', 'F')
-    );
 
-       static Sequence hexSeq = new Sequence(
-    new Character('u'),
-    new Sequence(
-        hex,
-        hex,
-        hex,
-        hex));
+        static Choice hex = new Choice(
+     new Range('0', '9'),
+     new Range('a', 'f'),
+     new Range('A', 'F')
+     );
+
+        static Sequence hexSeq = new Sequence(
+     new Character('u'),
+     new Sequence(
+         hex,
+         hex,
+         hex,
+         hex));
 
         [Theory]
         [InlineData("u1234", "")]
@@ -64,7 +64,7 @@ namespace JSON
         [Theory]
         [InlineData("abc", "abc")]
         [InlineData(null, null)]
-       
+
 
         public void ReturnsFalseWhenHexSeqIsIncorrect(string pattern, string remainingText)
         {
@@ -85,7 +85,7 @@ namespace JSON
 
         }
 
-        static Sequence test1 = new Sequence(new Text("abc"), new Character('d'));
+
 
         [Theory]
         [InlineData("abcx", "abcx")]
@@ -99,6 +99,86 @@ namespace JSON
             Assert.Equal(3, error.Position());
             Assert.Equal(remainingText, error.RemainingText());
         }
+
+        [Fact]
+        public void ReturnFalseWhenTest2IsIncorrect()
+        {
+            var abcd = new Sequence(
+    new Text("abc"),
+    new Text("abc"),
+    new Text("abc"),
+    new Character('d')
+);
+            var error = (Error)abcd.Match("abcabcabcx");
+            Assert.Equal(9, error.Position());
+
+        }
+
+        [Fact]
+        public void ReturnFalseWhenTest3IsIncorrect()
+        {
+            var abcd = new Sequence(
+                new Sequence(
+                    new Character('a'),
+                    new Character('b'),
+                        //new Sequence(
+                        new Character('c'),
+                        new Character('d')
+                 //)
+                 )
+               );
+
+            var error = (Error)abcd.Match("abcx");
+            Assert.Equal(3, error.Position());
+
+        }
+
+        [Fact]
+        public void ReturnFalseWhenTest4IsIncorrect()
+        {
+            var abcdef = new Sequence(
+                new Sequence(
+                    new Character('a'),
+                    new Character('b'),
+                    new Character('c'),
+                    new Character('d'),
+                        new Text("efg")
+                 )
+               );
+
+            var error = (Error)abcdef.Match("abcdefx");
+            Assert.Equal(6, error.Position());
+
+        }
+
+        [Fact]
+        public void ReturnFalseWhenTest5IsIncorrect()
+        {
+            var a = new Sequence(
+                new Sequence(
+                    new Character('a'))
+               );
+
+            var error = (Error)a.Match("e");
+            Assert.Equal(0, error.Position());
+
+        }
+
+        [Fact]
+        public void ReturnFalseWhenTest6IsIncorrect()
+        {
+            var ab = new Sequence(
+                new Sequence(
+                    new Character('a'),
+                    new Character('b')
+                    )
+               );
+
+            var error = (Error)ab.Match("ae");
+            Assert.Equal(1, error.Position());
+
+        }
+     
     }
 
 }

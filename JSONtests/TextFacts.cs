@@ -13,8 +13,9 @@ namespace JSON
         [InlineData("false", "false", "")]
         [InlineData("false", "falseX", "X")]
         [InlineData("", "true", "true")]
-        
 
+        [InlineData("", null, null)]
+        [InlineData(null, null, null)]
         public void ReturnsTrueWhenInputIsCorrect(string pattern, string match, string remainingText)
         {
             Text textClass = new Text(pattern);
@@ -25,20 +26,42 @@ namespace JSON
         }
 
         [Theory]
-        [InlineData("true",null)]
+        [InlineData("true", null)]
         [InlineData("true", "")]
         [InlineData("true", "trux")]
-        [InlineData("", null)]
-        [InlineData(null, null)]
 
-        public void ReturnsTrueWhenInputIsInCorrect(string pattern, string text)
+
+        public void ReturnsFalseWhenInputIsInCorrect(string pattern, string text)
         {
             Text textClass = new Text(pattern);
             var result = textClass.Match(text);
+
             Assert.False(result.Success());
             Assert.Equal(text, result.RemainingText());
         }
 
+        [Theory]
+        [InlineData("false", "fal")]
+        public void ReturnsFalseWhenTest1IsInCorrect(string pattern, string text)
+        {
+            Text textClass = new Text(pattern);
+            var result = (Error)textClass.Match(text);
 
+            Assert.Equal(3, result.Position());
+            Assert.False(result.Success());
+            Assert.Equal(text, result.RemainingText());
+        }
+
+        [Theory]
+        [InlineData("false", "true")]
+        public void ReturnsFalseWhenTest2IsInCorrect(string pattern, string text)
+        {
+            Text textClass = new Text(pattern);
+            var result = (Error)textClass.Match(text);
+
+            Assert.Equal(0, result.Position());
+            Assert.False(result.Success());
+            Assert.Equal(text, result.RemainingText());
+        }
     }
 }
