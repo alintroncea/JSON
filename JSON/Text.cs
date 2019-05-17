@@ -12,6 +12,7 @@ namespace JSON
 
         public Text(string prefix)
         {
+            this.prefix = prefix;
             IPattern[] patterns = new IPattern[0];
             if (!String.IsNullOrEmpty(prefix))
             {
@@ -22,7 +23,7 @@ namespace JSON
                 }
             }
 
-            this.pattern = new Sequence(patterns);
+            pattern = new Sequence(patterns);
         }
 
         public IMatch Match(string text)

@@ -16,13 +16,20 @@ namespace JSON
 
         public IMatch Match(string text)
         {
+            int counter = 0;
             foreach (var pattern in patterns)
             {
                 IMatch match = pattern.Match(text);
                 if (match.Success())
+                {
                     return match;
+                }
+                if (match is Error error && error.Position() > counter)
+                {
+                    counter = error.Position();
+                }
             }
-            return new Match(false, text);
+            return new Error(counter, text);
         }
 
         public void Add(IPattern patternToAdd)

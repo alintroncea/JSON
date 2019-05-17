@@ -31,5 +31,15 @@ namespace JSON
             Assert.False(a.Match(pattern).Success());
             Assert.Equal(remainingText, a.Match(pattern).RemainingText());
         }
+
+        [Fact]
+
+        public void ReturnFalseAtTest1()
+        {
+            OneOrMore newOneOrMore = new OneOrMore(new Text("abc"));
+            IMatch match = newOneOrMore.Match("ab");
+            var error = (Error)match;
+            Assert.Equal(2,error.Position());
+        }
     }
 }

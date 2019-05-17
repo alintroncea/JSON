@@ -20,10 +20,12 @@ namespace JSON
 
         public IMatch Match(string text)
         {
+            
             IMatch match = pattern.Match(text);
             while (match.Success())
                 match = pattern.Match(match.RemainingText());
 
+           
             return new Match(true, match.RemainingText());
         }
 

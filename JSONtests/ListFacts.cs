@@ -22,20 +22,40 @@ namespace JSON
             Assert.Equal(remainingText, a.Match(pattern).RemainingText());
         }
 
-       static OneOrMore digits = new OneOrMore(new Range('0', '9'));
-       static Many whitespace = new Many(new Any(" \r\n\t"));
-       static Sequence separator = new Sequence(whitespace, new Character(';'), whitespace);
-       static List list = new List(digits, separator);
+        static OneOrMore digits = new OneOrMore(new Range('0', '9'));
+        static Many whitespace = new Many(new Any(" \r\n\t"));
+        static Sequence separator = new Sequence(whitespace, new Character(';'), whitespace);
+        static List list = new List(digits, separator);
 
         [Theory]
         [InlineData("1; 22  ;\n 333 \t; 22", "")]
         [InlineData("1 \n;", " \n;")]
         [InlineData("abc", "abc")]
-       
+
         public void ReturnsTrueIfListIsCorrectAndRemainingTest(string pattern, string remainingText)
         {
             Assert.True(list.Match(pattern).Success());
             Assert.Equal(remainingText, list.Match(pattern).RemainingText());
+        }
+
+        [Fact]
+        public void ReturnsFalse()
+        {
+            var boolChoice = new Choice(new Sequence(
+                new Character('t'),
+                new Character('r'),
+                new Character('u'),
+                new Character('e')),
+                new Sequence(
+                new Character('f'),
+                new Character('a'),
+                new Character('l'),
+                new Character('s'),
+                new Character('e')));
+
+            var a = new List(boolChoice , new Character(','));
+            var error = (Error)a.Match("true false");
+            Assert.Equal(4, error.Position());
         }
     }
 }

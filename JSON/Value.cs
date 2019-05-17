@@ -58,14 +58,16 @@ namespace JSON
 
             IMatch match = pattern.Match(text);
 
-            return match;
-
             //if (!match.Success())
             //{
-            //    var error = (Error)pattern.Match(text);
-            //    return new (IMatch)Error(2, match.RemainingText());
+            //    Error error = (Error)match;
+
+            //    return new Error(error.Position(), text);
             //}
-            //return match;
+            return match;
+
+
+
         }
     }
 }

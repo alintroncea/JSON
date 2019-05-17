@@ -49,9 +49,10 @@ namespace JSON
 
 
         //[Theory]
-        //[InlineData("\"a", 2)]
-
-
+        //[InlineData("[true false]",4)]
+        //[InlineData("[true,false true]", 10)]
+        //[InlineData("\"john", 5)]
+        //[InlineData("john\"", 0)]
         //public void ReturnFalse(string pattern, int position)
         //{
         //    var result = (Error)value.Match(pattern);

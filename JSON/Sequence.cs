@@ -22,10 +22,8 @@ namespace JSON
         {
             string original = text;
             int counter = 0;
-
             foreach (var pattern in patterns)
             {
-
                 IMatch match = pattern.Match(text);
                 if (!match.Success())
                 {

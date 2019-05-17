@@ -16,6 +16,6 @@ namespace JSON
         public IMatch Match(string text)
             => !String.IsNullOrEmpty(text) && accepted?.Contains(text[0]) == true
                 ? new Match(true, text.Substring(1))
-                : new Match(false, text);
+                : (IMatch)new Error(0, text);
     }
 }

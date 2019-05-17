@@ -8,7 +8,7 @@ namespace JSON
     {
         readonly IPattern element;
         readonly IPattern separator;
-    
+
         readonly Many many;
 
         public List(IPattern element, IPattern separator)
@@ -21,9 +21,11 @@ namespace JSON
         public IMatch Match(string text)
         {
             IMatch match = element.Match(text);
-
             if (!match.Success())
+            {
+                
                 return new Match(true, text);
+            }
 
             return many.Match(match.RemainingText());
         }

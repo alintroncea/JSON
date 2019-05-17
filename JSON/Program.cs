@@ -14,14 +14,23 @@ namespace JSON
                 Value value = new Value();
                 foreach (Object obj in args)
                 {
-                    var text = File.ReadAllText(@obj.ToString());
-                    var lineCount = File.ReadAllLines(@obj.ToString());
-                    IMatch match = value.Match(text);
 
+
+                    var text = File.ReadAllText(@obj.ToString());
+                   
+                    IMatch match = value.Match(text);
                     Console.WriteLine("Success : " + match.Success());
                     Console.WriteLine("Remaining text :" + match.RemainingText());
-                  
-                }
+
+                    int lineCount = 0;
+
+                    Console.WriteLine(lineCount);
+                    if (!match.Success())
+                    {
+                        Error error = (Error)match;
+                      
+                    }
+                }   
             }
 
             else

@@ -22,7 +22,12 @@ namespace JSON
             IMatch match = pattern.Match(text);
 
             if (!match.Success())
-                return new Match(false, text);
+            {
+                Error error = (Error)match;
+
+                return new Error(error.Position(), text);
+            }
+               
 
             return many.Match(match.RemainingText());
         }
