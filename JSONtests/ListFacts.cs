@@ -38,24 +38,6 @@ namespace JSON
             Assert.Equal(remainingText, list.Match(pattern).RemainingText());
         }
 
-        [Fact]
-        public void ReturnsFalse()
-        {
-            var boolChoice = new Choice(new Sequence(
-                new Character('t'),
-                new Character('r'),
-                new Character('u'),
-                new Character('e')),
-                new Sequence(
-                new Character('f'),
-                new Character('a'),
-                new Character('l'),
-                new Character('s'),
-                new Character('e')));
-
-            var a = new List(boolChoice , new Character(','));
-            var error = (Error)a.Match("true false");
-            Assert.Equal(4, error.Position());
-        }
+        
     }
 }

@@ -6,9 +6,8 @@ namespace JSON
 {
    public class Error : IMatch
     {
-        readonly int position;
+        private int position;
         readonly string remainingText;
-
         public Error(int position, string remainingText)
         {
             this.position = position;
@@ -29,5 +28,6 @@ namespace JSON
         {
             return position;
         }
+
     }
 }

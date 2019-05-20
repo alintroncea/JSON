@@ -8,5 +8,7 @@ namespace JSON
     {
         bool Success();
         string RemainingText();
+
+     
     }
 }

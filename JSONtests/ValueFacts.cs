@@ -36,7 +36,9 @@ namespace JSON
         [InlineData("{\"boolean\":\"true\"}", "")]
         [InlineData("{\"First Number\":\"12\",\"Second Number\":\"12.5\",\"Third Number\":\"12.123E+3\"}", "")]
         [InlineData("{}", "")]
+        [InlineData("[true,false,true,false]", "")]
         [InlineData("{\t}", "")]
+        [InlineData("[true ]", "")]
 
 
 
@@ -48,16 +50,24 @@ namespace JSON
         }
 
 
-        //[Theory]
-        //[InlineData("[true false]",4)]
-        //[InlineData("[true,false true]", 10)]
-        //[InlineData("\"john", 5)]
-        //[InlineData("john\"", 0)]
-        //public void ReturnFalse(string pattern, int position)
-        //{
-        //    var result = (Error)value.Match(pattern);
-        //    Assert.Equal(position, result.Position());
-        //    Assert.False(result.Success());
-        //}
+        [Theory]
+        [InlineData("[truefalse]", 5)]
+        [InlineData("[true false]", 6)]
+        [InlineData("[true,false true]", 12)]
+        [InlineData("\"john", 5)]
+        [InlineData("john\"", 0)]
+        [InlineData("{\"name\" \"John\"}", 8)]
+       
+
+
+        public void ReturnFalse(string pattern, int position)
+        {
+            var result = (Error)value.Match(pattern);
+            Assert.Equal(position, result.Position());
+            //Assert.Equal("", result.RemainingText());
+
+        }
+
+
     }
 }

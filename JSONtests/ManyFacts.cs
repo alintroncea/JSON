@@ -38,5 +38,23 @@ namespace JSON
             Assert.True(digits.Match(pattern).Success());
             Assert.Equal(remainingText, digits.Match(pattern).RemainingText());
         }
+
+        [Fact]
+        public void ReturnFalseWhenTest1InCorrect()
+        {
+            Many sequence = new Many(
+                new Sequence(
+                    new Character('a'),
+                    new Character('b'),
+                    new Character('c')
+               )
+           );
+
+            var result = (SpecialError)sequence.Match("abcabcabx");
+            // 
+            // RT = ABX
+            Assert.Equal(8, result.Position());
+            Assert.Equal("abx", result.RemainingText());
+        }
     }
 }

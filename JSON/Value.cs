@@ -55,18 +55,8 @@ namespace JSON
 
         public IMatch Match(string text)
         {
-
             IMatch match = pattern.Match(text);
-
-            //if (!match.Success())
-            //{
-            //    Error error = (Error)match;
-
-            //    return new Error(error.Position(), text);
-            //}
             return match;
-
-
 
         }
     }

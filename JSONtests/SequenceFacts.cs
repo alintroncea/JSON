@@ -178,7 +178,6 @@ namespace JSON
             Assert.Equal(1, error.Position());
 
         }
-     
     }
 
 }

@@ -15,7 +15,6 @@ namespace JSON
                 foreach (Object obj in args)
                 {
 
-
                     var text = File.ReadAllText(@obj.ToString());
                    
                     IMatch match = value.Match(text);
@@ -24,11 +23,10 @@ namespace JSON
 
                     int lineCount = 0;
 
-                    Console.WriteLine(lineCount);
                     if (!match.Success())
                     {
                         Error error = (Error)match;
-                      
+                        Console.WriteLine("Error at position :" + error.Position());
                     }
                 }   
             }

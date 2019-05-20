@@ -4,8 +4,9 @@ using System.Text;
 
 namespace JSON
 {
-   public class Match : IMatch
+    public class Match : IMatch
     {
+    
         readonly bool successMatch;
         readonly string text;
 
@@ -13,6 +14,7 @@ namespace JSON
         {
             this.successMatch = successMatch;
             this.text = text;
+          
         }
 
         public string RemainingText()
@@ -24,5 +26,6 @@ namespace JSON
         {
             return successMatch;
         }
+
     }
 }

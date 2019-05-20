@@ -4,17 +4,15 @@ using System.Text;
 
 namespace JSON
 {
-    public class ListError : IMatch
+    public class SpecialError : IMatch
     {
-        readonly int position;
+        private int position;
         readonly string remainingText;
-
-        public ListError(int position, string remainingText)
+        public SpecialError(int position, string remainingText)
         {
             this.position = position;
             this.remainingText = remainingText;
         }
-
         public bool Success()
         {
             return true;

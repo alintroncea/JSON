@@ -31,7 +31,6 @@ namespace JSON
                 escapeSeq
             );
             var characters = new Many(character);
-
             pattern = new Sequence(new Character('"'),
                 characters,
                 new Character('"'));
@@ -41,7 +40,8 @@ namespace JSON
 
         public IMatch Match(string text)
         {
-            return pattern.Match(text);
+            IMatch match = pattern.Match(text);
+            return match;
         }
     }
 }
