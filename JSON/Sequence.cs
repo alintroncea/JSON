@@ -26,14 +26,11 @@ namespace JSON
             foreach (var pattern in patterns)
             {
                 IMatch match = pattern.Match(text);
-                if (match is SpecialError specialError)
+                if (match is SpecialError specialError && specialError.Position() > specialErrorCounter)
                 {
-                    if (specialError.Position() > specialErrorCounter)
-                    {
-                        specialErrorCounter = specialError.Position();
-                    }
+                    specialErrorCounter = specialError.Position();
                 }
-  
+
                 if (!match.Success())
                 {
                     if (match is Error error)
@@ -45,13 +42,14 @@ namespace JSON
                         }
                         return new Error(counter, original);
                     }
-
+                    return match;
                 }
                 counter += text.Length - match.RemainingText().Length;
                 text = match.RemainingText();
 
+
             }
-            
+
             return new Match(true, text);
         }
     }
