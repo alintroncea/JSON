@@ -7,12 +7,11 @@ namespace JSON
     public class Text : IPattern
     {
         //Clasa Text validează dacă textul este prefixat cu un string dat.
-        readonly string prefix;
+      
         readonly IPattern pattern;
 
         public Text(string prefix)
-        {
-            this.prefix = prefix;
+        {     
             IPattern[] patterns = new IPattern[0];
             if (!String.IsNullOrEmpty(prefix))
             {
@@ -28,7 +27,8 @@ namespace JSON
 
         public IMatch Match(string text)
         {
-            return this.pattern.Match(text);
+            IMatch match = pattern.Match(text);
+            return match;
         }
     }
 }

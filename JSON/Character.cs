@@ -16,9 +16,9 @@ namespace JSON
             this.pattern = pattern;
         }
 
-        public IMatch Match(string text) 
+        public IMatch Match(string text)
             => String.IsNullOrEmpty(text) || text[0] != pattern
-                ? (IMatch) new Error(0, text)
-                : new Match(true, text.Substring(1));
+                           ? (IMatch)new Error(0, text)
+                           : new Match(true, text.Substring(1));
     }
 }

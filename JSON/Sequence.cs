@@ -22,21 +22,36 @@ namespace JSON
         {
             string original = text;
             int counter = 0;
+            int specialErrorCounter = 0;
             foreach (var pattern in patterns)
             {
                 IMatch match = pattern.Match(text);
+                if (match is SpecialError specialError)
+                {
+                    if (specialError.Position() > specialErrorCounter)
+                    {
+                        specialErrorCounter = specialError.Position();
+                    }
+                }
+  
                 if (!match.Success())
                 {
                     if (match is Error error)
                     {
                         counter += error.Position();
+                        if (specialErrorCounter > counter)
+                        {
+                            counter = specialErrorCounter;
+                        }
+                        return new Error(counter, original);
                     }
-                    return new Error(counter, original);
+
                 }
                 counter += text.Length - match.RemainingText().Length;
-
                 text = match.RemainingText();
+
             }
+            
             return new Match(true, text);
         }
     }

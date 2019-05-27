@@ -28,7 +28,8 @@ namespace JSON
 
         public IMatch Match(string text)
         {
-            return pattern.Match(text);
+            IMatch match = pattern.Match(text);        
+            return match;
         }
 
     }

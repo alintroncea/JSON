@@ -56,8 +56,8 @@ namespace JSON
         [InlineData("[true,false true]", 12)]
         [InlineData("\"john", 5)]
         [InlineData("john\"", 0)]
-        [InlineData("{\"name\" \"John\"}", 8)]
-       
+        [InlineData("{\"name\" \"John\"}", 7)]
+        [InlineData("{\"name\":\"John\",\"age\":30,\"cars\"[\"Ford\", \"BMW\",\"Fiat\"]}", 29)]
 
 
         public void ReturnFalse(string pattern, int position)

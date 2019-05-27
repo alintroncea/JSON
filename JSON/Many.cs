@@ -22,27 +22,21 @@ namespace JSON
         {
 
             IMatch match = pattern.Match(text);
-         
+
             while (match.Success())
             {
                 match = pattern.Match(match.RemainingText());
 
             }
-            if (!match.Success())
-            {
-                if (match is Error error&&!String.IsNullOrEmpty(text))
-                {
-                    //if (String.IsNullOrEmpty(text))
-                    //{
-                    //    return new Match(true, text);
-                    //}
-                    int positionError = text.Length - match.RemainingText().Length + error.Position();
+            int positionError = text == null
+                ? 0
+                : text.Length - match.RemainingText().Length;
+            if (match is Error error)
+                positionError += error.Position();
 
-                    return new SpecialError(positionError, match.RemainingText());
-                }
-            }
-            return new Match(true, match.RemainingText());
+            return new SpecialError(positionError, match.RemainingText());
         }
 
     }
+
 }

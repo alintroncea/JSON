@@ -7,7 +7,6 @@ namespace JSON
     public class Value : IPattern
     {
         private readonly IPattern pattern;
-
         public Value()
         {
             var value = new Choice(
@@ -40,7 +39,7 @@ namespace JSON
             var members = new List(member, new Character(','));
 
             var myObject = new Sequence(whitespaces,
-                new Character('{'),
+                new Character('{'),               
                 members,
                 whitespaces,
                 new Character('}'),
@@ -48,13 +47,13 @@ namespace JSON
                );
 
             value.Add(myObject);
-
             pattern = value;
 
         }
 
         public IMatch Match(string text)
         {
+      
             IMatch match = pattern.Match(text);
             return match;
 

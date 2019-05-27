@@ -26,9 +26,7 @@ namespace JSON
                 Error error = (Error)match;
 
                 return new Error(error.Position(), text);
-            }
-               
-
+            } 
             return many.Match(match.RemainingText());
         }
 

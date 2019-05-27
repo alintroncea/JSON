@@ -37,7 +37,39 @@ namespace JSON
             Assert.True(list.Match(pattern).Success());
             Assert.Equal(remainingText, list.Match(pattern).RemainingText());
         }
-
         
+        [Theory]
+        [InlineData("x,Y,Z", 0)]
+        [InlineData("01234567,45,x", 12)]
+        [InlineData("1,45,3,x", 7)]
+        public void ReturnsThePositionOfTheLastMatch(string pattern, int position)
+        {
+            var list = new List(new OneOrMore(new Range('0', '9')), new Character(','));
+            var match = (SpecialError)list.Match(pattern);
+            Assert.True(match.Success());
+            Assert.Equal(position,match.Position());
+        }
+
+        [Theory]
+        [InlineData("abc,abc,abx", 10)]
+        public void ReturnsThePositionOfTheLastMatch2(string pattern, int position)
+        {
+            var list = new List(new Text("abc"), new Character(','));
+            var match = (SpecialError)list.Match(pattern);
+            Assert.True(match.Success());
+            Assert.Equal(position, match.Position());
+           // Assert.Equal("x", match.RemainingText());
+        }
+
+        [Theory]
+        [InlineData("abc,abcdeabc", 7)]
+        public void ReturnsThePositionOfTheLastMatch3(string pattern, int position)
+        {
+            var list = new List(new Text("abc"), new Character(','));
+            var match = (SpecialError)list.Match(pattern);
+            Assert.True(match.Success());
+            Assert.Equal(position, match.Position());
+            Assert.Equal("deabc", match.RemainingText());
+        }
     }
 }

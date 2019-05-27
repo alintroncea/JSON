@@ -20,14 +20,18 @@ namespace JSON
             foreach (var pattern in patterns)
             {
                 IMatch match = pattern.Match(text);
+             
                 if (match.Success())
                 {
                     return match;
                 }
+
+
                 if (match is Error error && error.Position() > counter)
                 {
                     counter = error.Position();
                 }
+
             }
             return new Error(counter, text);
         }

@@ -13,7 +13,6 @@ namespace JSON
 
         public List(IPattern element, IPattern separator)
         {
-
             this.element = element;
             this.separator = separator;
             many = new Many(new Sequence(separator, element));
@@ -21,16 +20,25 @@ namespace JSON
 
         public IMatch Match(string text)
         {
-
             IMatch match = element.Match(text);
-          
-            if (!match.Success())
+       
+            if (match.Success())
             {
-               
-                if(match is Error error&&!String.IsNullOrEmpty(text))
-                return new Match(true, text.Substring(error.Position()));
+                int positionError = text == null
+                    ? 0
+                    : text.Length - match.RemainingText().Length;
+
+                match = many.Match(match.RemainingText());
+                SpecialError specialError = (SpecialError)match;
+
+                return new SpecialError(positionError + specialError.Position(), specialError.RemainingText());
+             
             }
-            return many.Match(match.RemainingText());
+            if (match is Error error)
+            {
+                return new SpecialError(error.Position(), text);
+            }
+            return match;
         }
     }
 }

@@ -178,6 +178,37 @@ namespace JSON
             Assert.Equal(1, error.Position());
 
         }
+
+        [Fact]
+        public void ReturnFalseWhenTest7IsIncorrect()
+        {
+            var value = new Choice(
+                   new StringClass(),
+                   new Number(),
+                   new Text("true"),
+                   new Text("false"),
+                   new Text("null")
+               );
+
+            var whitespaces = new Many(new Any(" \r\n\t"));
+            var element = new Sequence(whitespaces, value, whitespaces);
+            var member = new Sequence(whitespaces,
+                new StringClass(),
+                whitespaces,
+                new Character(':'), element);
+            var members = new List(member, new Character(','));
+            var myObject = new Sequence(
+               new Character('{'),
+               members,
+               new Character('}')
+              );
+
+            var match = myObject.Match("{\"name\" \"John\"}");
+
+            var error = (Error)match;
+            Assert.Equal(7, error.Position());
+          
+        }
     }
 
 }
