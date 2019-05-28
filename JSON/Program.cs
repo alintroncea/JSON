@@ -22,8 +22,7 @@ namespace JSON
                     }
                     if (!String.IsNullOrEmpty(text))
                     {
-                        text = text.Replace('\r', ' ');
-                        text = text.Replace('\t', ' ');
+                        text = text.Replace('\r', '\n');
                         File.WriteAllText(@obj.ToString(), text);
                         IMatch match = value.Match(text);
 
@@ -59,15 +58,15 @@ namespace JSON
             int lineCount = 1;
             int columnCounter = 0;
             for (int i = 0; i < inputText.Length; i++)
-            {
-              
-                columnCounter++;
-
+            {              
+                columnCounter++;              
                 if (inputText[i] == '\n')
                 {
                     columnCounter = 0;
                     lineCount++;
                 }
+                if (inputText[i] == ' ')
+                    columnCounter++;
                 if (i == positionError)
                 {
                     Console.WriteLine("Error on line :" + lineCount + " at position :" + columnCounter);
