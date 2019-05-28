@@ -11,7 +11,6 @@ namespace JSON
        
         public Number()
         {
-
             var digit = new Range('0', '9');
             var digits = new OneOrMore(digit);
             var zero = new Character('0');
@@ -20,10 +19,7 @@ namespace JSON
             var fractional = new Sequence(new Character('.'), digits);
             var exponential = new Sequence(new Any("eE"), new Optional(new Any("+-")), digits);
 
-
             pattern = new Sequence(integer, new Optional(fractional), new Optional(exponential));
-
-
         }
 
         public IMatch Match(string text)
@@ -31,6 +27,5 @@ namespace JSON
             IMatch match = pattern.Match(text);        
             return match;
         }
-
     }
 }

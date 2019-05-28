@@ -13,10 +13,8 @@ namespace JSON
         public Match(bool successMatch, string text)
         {
             this.successMatch = successMatch;
-            this.text = text;
-          
+            this.text = text;        
         }
-
         public string RemainingText()
         {
             return text;

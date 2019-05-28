@@ -46,8 +46,6 @@ namespace JSON
                 }
                 counter += text.Length - match.RemainingText().Length;
                 text = match.RemainingText();
-
-
             }
 
             return new Match(true, text);

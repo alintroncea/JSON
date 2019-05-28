@@ -9,7 +9,6 @@ namespace JSON
         //Clasa Text validează dacă textul este prefixat cu un string dat.
       
         readonly IPattern pattern;
-
         public Text(string prefix)
         {     
             IPattern[] patterns = new IPattern[0];

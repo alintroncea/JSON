@@ -10,7 +10,6 @@ namespace JSON
 
         readonly IPattern pattern;
         readonly IPattern many;
-
         public OneOrMore(IPattern pattern)
         {
             this.pattern = pattern;

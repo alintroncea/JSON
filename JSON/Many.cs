@@ -17,7 +17,6 @@ namespace JSON
         {
             this.pattern = pattern;
         }
-
         public IMatch Match(string text)
         {
 

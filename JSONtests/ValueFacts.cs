@@ -54,6 +54,7 @@ namespace JSON
         [InlineData("[truefalse]", 5)]
         [InlineData("[true false]", 6)]
         [InlineData("[true,false true]", 12)]
+        [InlineData("[true,false", 11)]
         [InlineData("\"john", 5)]
         [InlineData("john\"", 0)]
         [InlineData("{\"name\" \"John\"}", 7)]

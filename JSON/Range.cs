@@ -14,19 +14,15 @@ namespace JSON
 
         public Range(char start, char end)
         {
-
             startChar = start;
             endChar = end;
         }
 
         public IMatch Match(string text)
         {
-            
-
             return String.IsNullOrEmpty(text) || text[0] < startChar || text[0] > endChar
                 ? (IMatch)new Error(0, text)
                 : new Match(true, text.Substring(1));
         }
-
     }
 }

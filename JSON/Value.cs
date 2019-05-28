@@ -48,15 +48,13 @@ namespace JSON
 
             value.Add(myObject);
             pattern = value;
-
         }
 
         public IMatch Match(string text)
         {
-      
-            IMatch match = pattern.Match(text);
+           IMatch match = pattern.Match(text);
+          
             return match;
-
         }
     }
 }

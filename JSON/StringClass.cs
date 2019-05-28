@@ -34,13 +34,12 @@ namespace JSON
             pattern = new Sequence(new Character('"'),
                 characters,
                 new Character('"'));
-
-
         }
 
         public IMatch Match(string text)
         {
             IMatch match = pattern.Match(text);
+           
             return match;
         }
     }

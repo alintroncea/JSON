@@ -17,12 +17,10 @@ namespace JSON
         {
             return true;
         }
-
         public string RemainingText()
         {
             return remainingText;
         }
-
         public int Position()
         {
             return position;

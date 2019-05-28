@@ -197,13 +197,16 @@ namespace JSON
                 whitespaces,
                 new Character(':'), element);
             var members = new List(member, new Character(','));
-            var myObject = new Sequence(
-               new Character('{'),
-               members,
-               new Character('}')
-              );
+            var myObject = new Sequence(whitespaces,
+                 new Character('{'),
+                 members,
+                 whitespaces,
+                 new Character('}'),
+                 whitespaces
+                );
 
-            var match = myObject.Match("{\"name\" \"John\"}");
+            value.Add(myObject);
+            var match = value.Match("{\"name\" \"John\"}");
 
             var error = (Error)match;
             Assert.Equal(7, error.Position());
