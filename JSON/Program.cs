@@ -62,7 +62,7 @@ namespace JSON
                 columnCounter++;              
                 if (inputText[i] == '\n')
                 {
-                    columnCounter = 0;
+                    columnCounter = 1;
                     lineCount++;
                 }
                 if (inputText[i] == ' ')
