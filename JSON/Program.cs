@@ -60,9 +60,7 @@ namespace JSON
             int columnCounter = 0;
             for (int i = 0; i < inputText.Length; i++)
             {
-                //if (inputText[i] == ' ')
-                //    continue;
-
+              
                 columnCounter++;
 
                 if (inputText[i] == '\n')
