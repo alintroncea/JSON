@@ -56,7 +56,7 @@ namespace JSON
         static void DisplayError(int positionError, string inputText)
         {
             int lineCount = 1;
-            int columnCounter = 0;
+            int columnCounter = 1;
             for (int i = 0; i < inputText.Length; i++)
             {              
                 columnCounter++;              
