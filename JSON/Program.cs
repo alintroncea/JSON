@@ -10,40 +10,41 @@ namespace JSON
         {
             if (args.Length > 0)
             {
-                char[] whitespaces = { '\t', '\r' };
+              
                 Value value = new Value();
                 foreach (Object obj in args)
                 {
                     var text = File.ReadAllText(@obj.ToString());
 
-                    foreach(char currentChar in text)
+                    if (String.IsNullOrEmpty(text))
                     {
-                        for(int i = 0; i < whitespaces.Length; i++)
-                        {
-                            if(currentChar == whitespaces[i])
-                            {
-                                text = text.Replace(currentChar, ' ');
-                                File.WriteAllText("C:\\Users\\Alin\\Desktop\\NewDocument.txt", text);
-                            }
-                        }
+                        Console.WriteLine("null");
                     }
- 
-                    IMatch match = value.Match(text);
-                   
-                    if (match.Success())
-                        Console.WriteLine("Valid JSON" );
+                    if (!String.IsNullOrEmpty(text))
+                    {
+                        text = text.Replace('\r', ' ');
+                        text = text.Replace('\t', ' ');
+                        File.WriteAllText(@obj.ToString(), text);
+                        IMatch match = value.Match(text);
 
-                    if (match.Success()&&match.RemainingText()!= String.Empty)
-                    {
-                        int positionError = text.Length - match.RemainingText().Length;
-                        DisplayError(positionError, match.RemainingText());
+                        if (match.Success())
+                            Console.WriteLine("Valid JSON");
+
+
+                        if (match.Success() && match.RemainingText() != String.Empty)
+                        {
+                            int positionError = text.Length - match.RemainingText().Length;
+                            DisplayError(positionError, match.RemainingText());
+                        }
+                        if (!match.Success())
+                        {
+                            Error error = (Error)match;
+                            DisplayError(error.Position(), text);
+
+                        }
+
                     }
-                    if (!match.Success())
-                    {
-                        Error error = (Error)match;
-                        DisplayError(error.Position(), text);
-                       
-                    }
+                  
                 }
             }
 
@@ -59,8 +60,8 @@ namespace JSON
             int columnCounter = 0;
             for (int i = 0; i < inputText.Length; i++)
             {
-                if (inputText[i] == ' ')
-                    continue;
+                //if (inputText[i] == ' ')
+                //    continue;
 
                 columnCounter++;
 
