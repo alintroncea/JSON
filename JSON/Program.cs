@@ -15,11 +15,13 @@ namespace JSON
                 foreach (Object obj in args)
                 {
                     var text = File.ReadAllText(@obj.ToString());
-                    string[] lines = File.ReadAllLines(@obj.ToString());
 
                     if (!String.IsNullOrEmpty(text))
                     {
                         IMatch match = value.Match(text);
+                        text = text.Replace("\r", "\n");
+                        File.WriteAllText(@obj.ToString(), text);
+                        string[] lines = File.ReadAllLines((@obj.ToString()));
 
                         if (match.Success())
                             Console.WriteLine("Valid JSON");
@@ -28,11 +30,12 @@ namespace JSON
                         {
                             int positionError = text.Length - match.RemainingText().Length;
                             DisplayError(positionError, lines);
+
                         }
                         if (!match.Success())
                         {
                             Error error = (Error)match;
-                            DisplayError(error.Position(), lines);
+                            DisplayError(error.Position(),lines);
                         }
                     }
 
@@ -47,23 +50,42 @@ namespace JSON
 
         static void DisplayError(int positionError, string[] lines)
         {
-            int elementCounter = 1;
-            int lineCounter = 0;
+            int lineCount = 0;
+            int counter = 0;
+
             foreach (string line in lines)
             {
-                lineCounter++;
-                int charCounter = 1;
+                lineCount++;
+                int elementCount = 0;
                 foreach (char c in line)
                 {
-                    charCounter++;
-                    elementCounter++;
-                    if (elementCounter == positionError)
+                    elementCount++;
+                    counter++;
+                    if (counter == positionError)
                     {
-                        Console.WriteLine("Error on line :" + lineCounter + " at position :" + charCounter);
-                     
+                        Console.WriteLine("Error at line " + lineCount + " on position " + elementCount);
+
                     }
+
                 }
             }
+            //for (int i = 0; i < input.Length; i++)
+            //{
+            //    elementCount++;
+            //    Console.WriteLine(i + " :" + input[i]);
+            //    if (input[i] == '\n')
+            //    {
+            //        lineCount++;
+            //    }                   
+
+            //    if (i == positionError)
+            //    {
+
+            //    }
+            //}
+
+
+
         }
 
     }
