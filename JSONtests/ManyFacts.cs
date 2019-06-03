@@ -42,7 +42,7 @@ namespace JSON
         [Fact]
         public void ReturnFalseWhenTest1InCorrect()
         {
-            Many sequence = new Many(
+            var sequence = new Many(
                 new Sequence(
                     new Character('a'),
                     new Character('b'),
@@ -55,6 +55,16 @@ namespace JSON
             // RT = ABX
             Assert.Equal(8, result.Position());
             Assert.Equal("abx", result.RemainingText());
+        }
+
+        [Fact]
+        public void ReturnFalseWhenTest2InCorrect()
+        {
+            var whitespaces = new Many(new Any(" \r\n\t"));
+            var result = whitespaces.Match(" \r\t");
+   
+            Assert.True(result.Success());
+            Assert.Equal("", result.RemainingText());
         }
     }
 }

@@ -25,7 +25,7 @@ namespace JSON
         [InlineData("\"Te\"st\"", "st\"")]
         [InlineData("\"\\nAnother line\"", "")]
         [InlineData("\"Test\\u0097\\nAnother line\"", "")]
-
+        [InlineData("\"id\"\"file\"", "\"file\"")]
 
         public void ReturnTrue(string pattern, string remainingText)
 

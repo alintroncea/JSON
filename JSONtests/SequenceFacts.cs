@@ -192,25 +192,32 @@ namespace JSON
 
             var whitespaces = new Many(new Any(" \r\n\t"));
             var element = new Sequence(whitespaces, value, whitespaces);
+
             var member = new Sequence(whitespaces,
                 new StringClass(),
                 whitespaces,
-                new Character(':'), element);
+                new Character(':'),
+                element);
+
             var members = new List(member, new Character(','));
             var myObject = new Sequence(whitespaces,
-                 new Character('{'),
-                 members,
-                 whitespaces,
-                 new Character('}'),
-                 whitespaces
-                );
-
+               new Character('{'),
+               whitespaces,
+               members,
+               whitespaces,
+               new Character('}'),
+               whitespaces
+              );
             value.Add(myObject);
-            var match = value.Match("{\"name\" \"John\"}");
-
+            //var newObject = new Sequence(whitespaces, new Character('{'), whitespaces,members,whitespaces,new Character('}'),whitespaces);
+            //var match = members.Match(" \"id\" \"file\" " );
+            //var match = myObject.Match(" { \" name\" \"John\" } " );
+            //var match = myObject.Match(" { \"menu\" : { \"id\" \"file\" } }");
+            var match = myObject.Match("{ \"menu\" : { \"id\" \"file\" } }");
+            //var match = myObject.Match(" { \" name\" \"John\" }");
             var error = (Error)match;
-            Assert.Equal(7, error.Position());
-          
+            Assert.Equal(18, error.Position());
+
         }
     }
 

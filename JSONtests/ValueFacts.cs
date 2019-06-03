@@ -39,7 +39,7 @@ namespace JSON
         [InlineData("[true,false,true,false]", "")]
         [InlineData("{\t}", "")]
         [InlineData("[true ]", "")]
-
+        
 
 
         public void ReturnTrue(string pattern, string remainingText)
@@ -57,14 +57,19 @@ namespace JSON
         [InlineData("[true,false", 11)]
         [InlineData("\"john", 5)]
         [InlineData("john\"", 0)]
-        [InlineData("{\"name\" \"John\"}", 7)]
-        [InlineData("{\"name\":\"John\",\"age\":30,\"cars\"[\"Ford\", \"BMW\",\"Fiat\"]}", 29)]
-
-
+        [InlineData("{\"name\"\"John\"}", 7)]
+        [InlineData(" { \" name\" \"John\" } ", 11)]
+        [InlineData("{\"name\":\"John\"", 14)]
+        [InlineData("{\"name\":\"John\",\"age\":30,\"cars\"[\"Ford\", \"BMW\",\"Fiat\"]}", 30)]
+        [InlineData("[{\"id\"\"1\"}]",6)]
+        [InlineData("{\"menu\":{\"id\":\"file\",\"value\":\"File\",\"popup\":{\"menuitem\":[{\"value\":\"New\",\"onclick\"\"CreateNewDoc()\"]}}}", 81)]
+        [InlineData("{\"menu\" : {\"id\" \"file\"}}", 16)]
+        [InlineData("{ \"menu\" : { \"id\" \"file\" } }", 18)]
         public void ReturnFalse(string pattern, int position)
         {
             var result = (Error)value.Match(pattern);
             Assert.Equal(position, result.Position());
+           
             //Assert.Equal("", result.RemainingText());
 
         }

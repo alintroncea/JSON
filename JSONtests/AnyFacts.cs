@@ -43,5 +43,15 @@ namespace JSON
             Assert.Equal(remainingText, result.RemainingText());
         }
 
+        [Fact]
+        public void ReturnsFlaseWhenInputIsInCorrect2()
+        {
+            var any = new Any(" \r\n\t");
+
+            var result = any.Match("\r");
+            Assert.True(result.Success());
+       
+        }
+
     }
 }

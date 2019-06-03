@@ -25,8 +25,6 @@ namespace JSON
                 {
                     return match;
                 }
-
-
                 if (match is Error error && error.Position() > counter)
                 {
                     counter = error.Position();

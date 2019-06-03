@@ -25,7 +25,6 @@ namespace JSON
             while (match.Success())
             {
                 match = pattern.Match(match.RemainingText());
-
             }
             int positionError = text == null
                 ? 0

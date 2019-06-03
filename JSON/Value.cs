@@ -39,7 +39,8 @@ namespace JSON
             var members = new List(member, new Character(','));
 
             var myObject = new Sequence(whitespaces,
-                new Character('{'),               
+                new Character('{'),   
+                whitespaces,
                 members,
                 whitespaces,
                 new Character('}'),
