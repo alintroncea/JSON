@@ -65,6 +65,8 @@ namespace JSON
         [InlineData("{\"menu\":{\"id\":\"file\",\"value\":\"File\",\"popup\":{\"menuitem\":[{\"value\":\"New\",\"onclick\"\"CreateNewDoc()\"]}}}", 81)]
         [InlineData("{\"menu\" : {\"id\" \"file\"}}", 16)]
         [InlineData("{ \"menu\" : { \"id\" \"file\" } }", 18)]
+        [InlineData("          [  \"S\\ufefhi]", 20)]
+
         public void ReturnFalse(string pattern, int position)
         {
             var result = (Error)value.Match(pattern);

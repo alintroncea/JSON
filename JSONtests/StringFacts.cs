@@ -35,7 +35,15 @@ namespace JSON
             Assert.True(match.Success());
         }
 
-       
+        [Theory]
+        [InlineData("\"t\\uf7fhi\"", 7)]
+
+        public void ReturnFalse(string pattern, int position)
+
+        {
+            var match = (Error)stringClass.Match(pattern);
+            Assert.Equal(position, match.Position());
+        }
 
     }
 }

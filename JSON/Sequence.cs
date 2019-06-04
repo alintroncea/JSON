@@ -29,7 +29,7 @@ namespace JSON
                 IMatch match = pattern.Match(text);
 
 
-                if (match is SpecialError specialError && specialError.Position() > specialErrorCounter)
+                if (match is SpecialError specialError )
                 {
                     specialErrorCounter += specialError.Position();
 

@@ -23,6 +23,7 @@ namespace JSON
 
             var array = new Sequence(whitespaces,
                new Character('['),
+                whitespaces,
                 elements,
                 whitespaces,
                 new Character(']'),

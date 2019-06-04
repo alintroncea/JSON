@@ -19,6 +19,7 @@ namespace JSON
                     if (!String.IsNullOrEmpty(text))
                     {
                         IMatch match = value.Match(text);
+                        TextPosition textPosition;
 
                         if (match.Success())
                             Console.WriteLine("Valid JSON");
@@ -26,13 +27,14 @@ namespace JSON
                         if (match.Success() && match.RemainingText() != String.Empty)
                         {
                             int positionError = text.Length - match.RemainingText().Length;
-                          
-
+                            textPosition = new TextPosition(positionError, text);
+                            textPosition.DisplayError();
                         }
                         if (!match.Success())
                         {
                             Error error = (Error)match;
-                         
+                            textPosition = new TextPosition(error.Position(), text);
+                            textPosition.DisplayError();
                         }
                     }
 
@@ -45,6 +47,6 @@ namespace JSON
             }
         }
 
-     
+
     }
 }

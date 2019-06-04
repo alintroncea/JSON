@@ -32,6 +32,8 @@ namespace JSON
             if (match is Error error)
                 positionError += error.Position();
 
+         
+
             return new SpecialError(positionError, match.RemainingText());
         }
 
